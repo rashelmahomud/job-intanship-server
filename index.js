@@ -14,11 +14,10 @@ const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 
 
-client.connect(err => {
-    const collection = client.db("test").collection("devices");
-    // perform actions on the collection object
-    client.close();
-});
+// client.connect(err => {
+//     const collection = client.db("test").collection("devices");
+//     client.close();
+// });
 
 
 async function run() {
@@ -57,6 +56,7 @@ async function run() {
         app.get("/user/:email", async (req, res) => {
             const email = req.params.email;
             const result = await userCollection.findOne({ email });
+            console.log(result)
             if (result?.email) {
                 return res.send({ status: true, data: result });
             }
