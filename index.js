@@ -56,7 +56,6 @@ async function run() {
         app.get("/user/:email", async (req, res) => {
             const email = req.params.email;
             const result = await userCollection.findOne({ email });
-            console.log(result)
             if (result?.email) {
                 return res.send({ status: true, data: result });
             }
